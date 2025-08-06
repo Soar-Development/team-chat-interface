@@ -1,7 +1,3 @@
-Here’s a clean and professional `README.md` file for your `team-chat-interface` package — ready to drop into your repo:
-
----
-
 ````md
 # 🧩 Team Chat Interface
 
