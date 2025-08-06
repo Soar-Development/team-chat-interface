@@ -1,4 +1,3 @@
-````md
 # 🧩 Team Chat Interface
 
 A reusable, modular React component for building real-time team chat experiences in dashboards, internal tools, or collaborative applications. Designed with flexibility in mind and styled using TailwindCSS and Radix UI.
@@ -110,21 +109,3 @@ To run in watch mode:
 yarn dev
 ```
 
----
-
-## 📄 License
-
-MIT — free for personal and commercial use.
-
-```
-
----
-
-Let me know if you’d like:
-
-- A badges section (npm version, license, etc.)
-- A full API docs section
-- Storybook or demo usage instructions
-
-Want me to generate a minimal example repo for testing this package too?
-```
