@@ -1,0 +1,1 @@
+export { TeamChatInterface } from './components/team-chat-interface';
