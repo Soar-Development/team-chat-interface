@@ -1791,7 +1791,7 @@ var TeamChatInterface = ({
       )) })
     ] });
   };
-  return /* @__PURE__ */ jsxs3("div", { className: "flex h-full w-full relative", children: [
+  return /* @__PURE__ */ jsxs3("div", { className: "flex flex-col h-full mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl w-full", children: [
     /* @__PURE__ */ jsx7("div", { className: `${isHomeTeam ? "p-2 sm:p-5" : ""} w-full h-full`, children: /* @__PURE__ */ jsxs3("div", { className: `flex flex-col h-full transition-all duration-300 w-full overflow-hidden ${isHomeTeam ? "border border-border rounded-[34px] max-w-4xl mx-auto p-4 bg-muted-3" : ""}`, children: [
       /* @__PURE__ */ jsx7("style", { children: `
         .chat-messages::-webkit-scrollbar {
@@ -1818,24 +1818,16 @@ var TeamChatInterface = ({
             /* @__PURE__ */ jsx7("h3", { className: "text-lg font-medium text-foreground-80 mb-2", children: "Start chatting with this team" }),
             /* @__PURE__ */ jsx7("p", { className: "max-w-md text-sm", children: "Send a message to start a conversation with this team of AI agents working together." })
           ] }) }) : /* @__PURE__ */ jsxs3("div", { className: "space-y-4 sm:space-y-6 w-full", children: [
-            messages.map((message, index) => /* @__PURE__ */ jsx7("div", { className: `flex ${message.sender === "user" ? "justify-end" : "justify-start"} w-full px-2 sm:px-4`, children: /* @__PURE__ */ jsxs3("div", { className: `flex ${message.sender === "user" ? "flex-row-reverse" : "flex-row"} gap-2 sm:gap-3 max-w-[85%] ${message.sender === "user" ? "ml-auto" : ""}`, children: [
-              !isHomeTeam && /* @__PURE__ */ jsx7(
-                "div",
-                {
-                  className: `flex-shrink-0 ${message.sender === "user" ? "ml-1 sm:ml-2" : "mr-1 sm:mr-2"}`,
-                  children: message.sender === "user" ? user ? /* @__PURE__ */ jsx7(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ jsx7(AvatarFallback, { className: "bg-gradient-to-br from-violet-500 to-violet-700", children: user?.username?.[0]?.toUpperCase() || "U" }) }) : /* @__PURE__ */ jsx7(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ jsx7(AvatarFallback, { className: "bg-gradient-to-br from-violet-500 to-violet-700", children: "U" }) }) : /* @__PURE__ */ jsx7(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ jsx7(AvatarFallback, { className: `bg-gradient-to-br ${accentColor}`, children: "T" }) })
-                }
-              ),
-              /* @__PURE__ */ jsxs3(
-                "div",
-                {
-                  className: `rounded-2xl px-4 sm:px-5 py-3 sm:py-4 flex-1 overflow-x-auto border ${message.sender === "user" ? "bubble-user ml-auto" : "bubble-team"} group`,
-                  children: [
+            messages.map((message, index) => {
+              const isUser = message.sender === "user";
+              const timestamp = formatMessageTimestamp(message.timestamp, index);
+              if (isUser) {
+                return /* @__PURE__ */ jsx7("div", { className: "flex justify-end w-full px-2 sm:px-4", children: /* @__PURE__ */ jsxs3("div", { className: "flex flex-row gap-2 sm:gap-3 max-w-[85%] ml-auto", children: [
+                  /* @__PURE__ */ jsxs3("div", { className: "rounded-2xl px-4 sm:px-5 py-3 sm:py-4 flex-1 overflow-x-auto border bubble-user ml-auto group", children: [
                     /* @__PURE__ */ jsxs3("div", { className: "flex justify-between items-center mb-1 text-xs text-muted-foreground-60", children: [
                       /* @__PURE__ */ jsxs3("span", { children: [
-                        message.sender === "user" ? "You" : "Team",
-                        " - ",
-                        formatMessageTimestamp(message.timestamp, index)
+                        "You - ",
+                        timestamp
                       ] }),
                       /* @__PURE__ */ jsx7(
                         "button",
@@ -1848,10 +1840,32 @@ var TeamChatInterface = ({
                       )
                     ] }),
                     renderMessageContent(message)
-                  ]
-                }
-              )
-            ] }) })),
+                  ] }),
+                  !isHomeTeam && /* @__PURE__ */ jsx7("div", { className: "flex-shrink-0 ml-1 sm:ml-2", children: user ? /* @__PURE__ */ jsx7(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ jsx7(AvatarFallback, { className: "bg-gradient-to-br from-violet-500 to-violet-600", children: user?.username?.[0]?.toUpperCase() || "U" }) }) : /* @__PURE__ */ jsx7(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ jsx7(AvatarFallback, { className: "bg-gradient-to-br from-violet-500 to-violet-700", children: "U" }) }) })
+                ] }) }, message.id);
+              }
+              return /* @__PURE__ */ jsx7("div", { className: "flex justify-start w-full px-2 sm:px-4", children: /* @__PURE__ */ jsxs3("div", { className: "flex flex-row gap-2 sm:gap-3 max-w-[85%]", children: [
+                !isHomeTeam && /* @__PURE__ */ jsx7("div", { className: "flex-shrink-0 mr-1 sm:mr-2", children: /* @__PURE__ */ jsx7(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ jsx7(AvatarFallback, { className: `bg-gradient-to-br ${accentColor}`, children: "T" }) }) }),
+                /* @__PURE__ */ jsxs3("div", { className: "rounded-2xl px-4 sm:px-5 py-3 sm:py-4 flex-1 overflow-x-auto border bubble-team group", children: [
+                  /* @__PURE__ */ jsxs3("div", { className: "flex justify-between items-center mb-1 text-xs text-muted-foreground-60", children: [
+                    /* @__PURE__ */ jsxs3("span", { children: [
+                      "Team - ",
+                      timestamp
+                    ] }),
+                    /* @__PURE__ */ jsx7(
+                      "button",
+                      {
+                        onClick: () => handleCopy(message.content),
+                        title: "Copy",
+                        className: "ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground",
+                        children: /* @__PURE__ */ jsx7(Copy, { className: "w-4 h-4" })
+                      }
+                    )
+                  ] }),
+                  renderMessageContent(message)
+                ] })
+              ] }) }, message.id);
+            }),
             (isLoading || hasStreamedResponse) && normalizeEvents(currentEvents, currentStreamingContent, getMemberDisplayName).length > 0 && /* @__PURE__ */ jsx7("div", { className: `flex justify-start w-full px-2 sm:px-4`, children: /* @__PURE__ */ jsxs3("div", { className: `flex flex-row gap-2 sm:gap-3 max-w-[85%]`, children: [
               !isHomeTeam && /* @__PURE__ */ jsx7("div", { className: "flex-shrink-0 mr-1 sm:mr-2", children: /* @__PURE__ */ jsx7(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ jsx7(AvatarFallback, { className: `bg-gradient-to-br ${accentColor}`, children: "T" }) }) }),
               /* @__PURE__ */ jsxs3("div", { className: `rounded-2xl px-3 sm:px-4 py-2 sm:py-3 ${isLoading && !hasStreamedResponse ? "bubble-user ml-auto" : "bubble-team"} text-foreground flex-1 max-w-[700px] overflow-x-auto`, children: [

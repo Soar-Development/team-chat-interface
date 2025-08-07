@@ -1725,7 +1725,7 @@ export const TeamChatInterface = ({
 
   // Render the chat interface
   return (
-    <div className="flex h-full w-full relative">
+    <div className="flex flex-col h-full mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl w-full">
       {/* Main Chat Area */}
       <div className={`${isHomeTeam ? 'p-2 sm:p-5' : ''} w-full h-full`}>
         <div className={`flex flex-col h-full transition-all duration-300 w-full overflow-hidden ${isHomeTeam ? 'border border-border rounded-[34px] max-w-4xl mx-auto p-4 bg-muted-3' : ''}`}>
@@ -1769,61 +1769,85 @@ export const TeamChatInterface = ({
                 </div>
               ) : (
                 <div className='space-y-4 sm:space-y-6 w-full'>
-                  {messages.map((message, index) => (
-                    <div className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'} w-full px-2 sm:px-4`}>
-                      <div className={`flex ${message.sender === 'user' ? 'flex-row-reverse' : 'flex-row'} gap-2 sm:gap-3 max-w-[85%] ${message.sender === 'user' ? 'ml-auto' : ''}`}>
-                        {/* Message avatar */}
-                        {!isHomeTeam && (
-                          <div
-                            className={`flex-shrink-0 ${message.sender === 'user' ? 'ml-1 sm:ml-2' : 'mr-1 sm:mr-2'
-                              }`}
-                          >
-                            {message.sender === 'user' ? (
-                              user ? (
-                                <Avatar className='h-7 w-7 sm:h-8 sm:w-8 text-white'>
-                                  <AvatarFallback className='bg-gradient-to-br from-violet-500 to-violet-700'>
-                                    {user?.username?.[0]?.toUpperCase() || 'U'}
-                                  </AvatarFallback>
-                                </Avatar>
-                              ) : (
-                                <Avatar className='h-7 w-7 sm:h-8 sm:w-8 text-white'>
-                                  <AvatarFallback className='bg-gradient-to-br from-violet-500 to-violet-700'>
-                                    U
-                                  </AvatarFallback>
-                                </Avatar>
-                              )
-                            ) : (
-                              <Avatar className='h-7 w-7 sm:h-8 sm:w-8 text-white'>
+                  {messages.map((message, index) => {
+                    const isUser = message.sender === 'user';
+                    const timestamp = formatMessageTimestamp(message.timestamp, index);
+
+                    if (isUser) {
+                      return (
+                        <div key={message.id} className="flex justify-end w-full px-2 sm:px-4">
+                          <div className="flex flex-row gap-2 sm:gap-3 max-w-[85%] ml-auto">
+                            {/* Message bubble */}
+                            <div className="rounded-2xl px-4 sm:px-5 py-3 sm:py-4 flex-1 overflow-x-auto border bubble-user ml-auto group">
+                              <div className="flex justify-between items-center mb-1 text-xs text-muted-foreground-60">
+                                <span>You - {timestamp}</span>
+                                <button
+                                  onClick={() => handleCopy(message.content)}
+                                  title="Copy"
+                                  className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground"
+                                >
+                                  <Copy className="w-4 h-4" />
+                                </button>
+                              </div>
+                              {renderMessageContent(message)}
+                            </div>
+
+                            {/* Avatar */}
+                            {!isHomeTeam && (
+                              <div className="flex-shrink-0 ml-1 sm:ml-2">
+                                {user ? (
+                                  <Avatar className="h-7 w-7 sm:h-8 sm:w-8 text-white">
+                                    <AvatarFallback className="bg-gradient-to-br from-violet-500 to-violet-600">
+                                      {user?.username?.[0]?.toUpperCase() || 'U'}
+                                    </AvatarFallback>
+                                  </Avatar>
+                                ) : (
+                                  <Avatar className="h-7 w-7 sm:h-8 sm:w-8 text-white">
+                                    <AvatarFallback className="bg-gradient-to-br from-violet-500 to-violet-700">
+                                      U
+                                    </AvatarFallback>
+                                  </Avatar>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    // Team message
+                    return (
+                      <div key={message.id} className="flex justify-start w-full px-2 sm:px-4">
+                        <div className="flex flex-row gap-2 sm:gap-3 max-w-[85%]">
+                          {/* Avatar */}
+                          {!isHomeTeam && (
+                            <div className="flex-shrink-0 mr-1 sm:mr-2">
+                              <Avatar className="h-7 w-7 sm:h-8 sm:w-8 text-white">
                                 <AvatarFallback className={`bg-gradient-to-br ${accentColor}`}>
                                   T
                                 </AvatarFallback>
                               </Avatar>
-                            )}
-                          </div>
-                        )}
+                            </div>
+                          )}
 
-                        {/* Message content */}
-                        <div
-                          className={`rounded-2xl px-4 sm:px-5 py-3 sm:py-4 flex-1 overflow-x-auto border ${message.sender === 'user' ? 'bubble-user ml-auto' : 'bubble-team'} group`}
-                        >
-                          <div className="flex justify-between items-center mb-1 text-xs text-muted-foreground-60">
-                            <span>
-                              {message.sender === 'user' ? 'You' : 'Team'} - {formatMessageTimestamp(message.timestamp, index)}
-                            </span>
-                            <button
-                              onClick={() => handleCopy(message.content)}
-                              title="Copy"
-                              className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground"
-                            >
-                              <Copy className="w-4 h-4" />
-                            </button>
+                          {/* Message bubble */}
+                          <div className="rounded-2xl px-4 sm:px-5 py-3 sm:py-4 flex-1 overflow-x-auto border bubble-team group">
+                            <div className="flex justify-between items-center mb-1 text-xs text-muted-foreground-60">
+                              <span>Team - {timestamp}</span>
+                              <button
+                                onClick={() => handleCopy(message.content)}
+                                title="Copy"
+                                className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground hover:text-foreground"
+                              >
+                                <Copy className="w-4 h-4" />
+                              </button>
+                            </div>
+                            {renderMessageContent(message)}
                           </div>
-
-                          {renderMessageContent(message)}
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
 
                   {/* Currently streaming message */}
                   {(isLoading || hasStreamedResponse) && normalizeEvents(currentEvents, currentStreamingContent, getMemberDisplayName).length > 0 && (
