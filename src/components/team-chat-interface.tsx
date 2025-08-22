@@ -1797,13 +1797,13 @@ export const TeamChatInterface = ({
                               <div className="flex-shrink-0 ml-1 sm:ml-2">
                                 {user ? (
                                   <Avatar className="h-7 w-7 sm:h-8 sm:w-8 text-white">
-                                    <AvatarFallback className="bg-gradient-to-br from-violet-500 to-violet-600">
+                                    <AvatarFallback className="gradient-color">
                                       {user?.username?.[0]?.toUpperCase() || 'U'}
                                     </AvatarFallback>
                                   </Avatar>
                                 ) : (
                                   <Avatar className="h-7 w-7 sm:h-8 sm:w-8 text-white">
-                                    <AvatarFallback className="bg-gradient-to-br from-violet-500 to-violet-700">
+                                    <AvatarFallback className="gradient-color">
                                       U
                                     </AvatarFallback>
                                   </Avatar>
@@ -1949,7 +1949,7 @@ export const TeamChatInterface = ({
                             {uploadProgress[fileKey] !== undefined && !isUploaded && (
                               <div className="w-full bg-muted-10 h-1 mt-1 rounded overflow-hidden">
                                 <div
-                                  className="bg-violet-500 h-full transition-all duration-300"
+                                  className="progress-color h-full transition-all duration-300"
                                   style={{ width: `${uploadProgress[fileKey]}%` }}
                                 />
                               </div>
@@ -2143,7 +2143,7 @@ export const TeamChatInterface = ({
               Cancel
             </AlertDialogCancel>
             <AlertDialogAction asChild>
-              <Button className='bg-violet-600 hover:bg-violet-700 text-foreground' asChild>
+              <Button className="button-color text-foreground" asChild>
                 <Link to='/payment'>Purchase Credits</Link>
               </Button>
             </AlertDialogAction>

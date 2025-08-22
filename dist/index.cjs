@@ -1877,7 +1877,7 @@ var TeamChatInterface = ({
                     ] }),
                     renderMessageContent(message)
                   ] }),
-                  !isHomeTeam && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "flex-shrink-0 ml-1 sm:ml-2", children: user ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AvatarFallback, { className: "bg-gradient-to-br from-violet-500 to-violet-600", children: user?.username?.[0]?.toUpperCase() || "U" }) }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AvatarFallback, { className: "bg-gradient-to-br from-violet-500 to-violet-700", children: "U" }) }) })
+                  !isHomeTeam && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "flex-shrink-0 ml-1 sm:ml-2", children: user ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AvatarFallback, { className: "gradient-color", children: user?.username?.[0]?.toUpperCase() || "U" }) }) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Avatar, { className: "h-7 w-7 sm:h-8 sm:w-8 text-white", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AvatarFallback, { className: "gradient-color", children: "U" }) }) })
                 ] }) }, message.id);
               }
               return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "flex justify-start w-full px-2 sm:px-4", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "flex flex-row gap-2 sm:gap-3 max-w-[85%]", children: [
@@ -1993,7 +1993,7 @@ var TeamChatInterface = ({
                   uploadProgress[fileKey] !== void 0 && !isUploaded && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "w-full bg-muted-10 h-1 mt-1 rounded overflow-hidden", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
                     "div",
                     {
-                      className: "bg-violet-500 h-full transition-all duration-300",
+                      className: "progress-color h-full transition-all duration-300",
                       style: { width: `${uploadProgress[fileKey]}%` }
                     }
                   ) })
@@ -2148,7 +2148,7 @@ var TeamChatInterface = ({
       /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AlertDialogDescription, { className: "text-foreground-80", children: "You need credits to use the team chat feature. Purchase credits to continue." }),
       /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(AlertDialogFooter, { className: "mt-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AlertDialogCancel, { className: "bg-card hover:bg-card-hover text-foreground-80 border-border", children: "Cancel" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AlertDialogAction, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Button, { className: "bg-violet-600 hover:bg-violet-700 text-foreground", asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react_router_dom.Link, { to: "/payment", children: "Purchase Credits" }) }) })
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(AlertDialogAction, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Button, { className: "button-color text-foreground", asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_react_router_dom.Link, { to: "/payment", children: "Purchase Credits" }) }) })
       ] })
     ] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(GlobalStyle, {})
